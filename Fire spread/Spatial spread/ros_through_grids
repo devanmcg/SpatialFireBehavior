@@ -1,0 +1,28 @@
+pacman::p_load(ggplot2, vegan)
+
+times <- data.frame(deg=0, pt=c("A", "B", "C", "D"), time=c(1,1,2,1))
+orig <- data.frame(deg=0, pt=c("A", "B", "C", "D"), x=c(0,1,1,2), y=c(0,0,1,0))
+
+ggplot(df, aes(x=x, y=y)) + 
+  geom_text(aes(label=pt, color=factor(deg))) +
+  scale_x_continuous(breaks=c(0,1,2), labels=c(0,1,2)) +
+  scale_y_continuous(breaks=c(0,1,2)) 
+or.m <- vegdist(orig[3:4], method="euclidean")
+times.m <- dist(times$time)
+
+sqrt((or.m^2)/2) / times.m
+
+x11() 
+dir=135
+rot.n45 <- data.frame(deg=dir-180, pt=c("A", "B", "C", "D"),
+			x=as.numeric(I((orig$x)*cos(deg)) + I(orig$y*sin(deg))),
+			y=as.numeric(I(-(orig$x)*sin(deg)) + I(orig$y*cos(deg))))
+df <- rbind(orig, rot.n45)
+sqrt(vegdist(rot.n45[3:4], method="euclidean")^2)
+
+
+ggplot(df, aes(x=x, y=y)) + 
+  geom_text(aes(label=pt, color=factor(deg))) +
+  scale_x_continuous(breaks=c(0,1,2)) +
+  scale_y_continuous(breaks=c(0,1,2)) +
+coord_cartesian(xlim=c(-1,2), ylim=c(-1,2))
