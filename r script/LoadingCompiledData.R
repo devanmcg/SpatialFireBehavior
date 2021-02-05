@@ -1,11 +1,13 @@
-pacman::p_load(tidyverse)
+pacman::p_load(tidyverse, lubridate)
 
-wd_fp = "C:/Users/devan/GitHubProjects/SpatialFireBehavior/" # home PC
+# wd_fp = "C:/Users/devan/GitHubProjects/SpatialFireBehavior/" # home PC
+
+wd_fp = getwd() # machine-independent?
 
 # Pull data from .csv created from MZ's compiled Excel file (tab = All)
 
   AllData <-  
-    read_csv(paste0(wd_fp, "data/fromMZ/CompiledData.csv")) %>%
+    read_csv(paste0(wd_fp, "/data/fromMZ/CompiledData2.csv")) %>%
     filter(location != "OAK") %>%
       mutate(date = as.Date(date, format = "%m/%d/%Y"),
                L = str_remove(location, "REC"), 
@@ -19,7 +21,7 @@ wd_fp = "C:/Users/devan/GitHubProjects/SpatialFireBehavior/" # home PC
     unite(timestamp, c(date, time), sep = " ") %>%
     mutate(timestamp = as.POSIXct(timestamp, format = "%Y-%m-%d %H:%M:%S")) %>%
         select(FireCode, timestamp, plot, array, TC, MaxC, 
-               AirTemp, RH, MaxWindSpeed, 
+               AirTemp, RH, dpC, MaxWindSpeed, 
                LAI, FMC, KgHa) 
 
 # Isolate soil surface temperature (TC 4)
