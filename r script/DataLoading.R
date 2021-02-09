@@ -3,7 +3,7 @@ pacman::p_load(tidyverse, lubridate)
 FilePath = getwd()
 
   AllData <-  
-    read_csv(paste0(FilePath, "data/fromMZ/CompiledData2.csv")) %>%
+    read_csv(paste0(FilePath, "/data/fromMZ/CompiledData2.csv")) %>%
     filter(location != "OAK") %>%
     mutate(date = as.Date(date, format = "%m/%d/%Y"),
            L = str_remove(location, "REC"), 
