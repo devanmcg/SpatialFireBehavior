@@ -1,21 +1,22 @@
-pacman::p_load(tidyverse)
+pacman::p_load(tidyverse, mice)
 
-load(paste0(FilePath, "/data/AnalysisData.Rdata"))
+
+AnalysisData <- read_csv(paste0(getwd(), "/data/AnalysisDataKY.csv"))
 
 # MICE regression 
-
-pacman::p_load(mice, broom.mixed)
 
 #
 # Imputations
 #
   # View pattern of missing data
     AnalysisData %>%
+      select(AirTemp:tHa, -LAI) %>% 
         md.pattern() 
 
   # Calculate imputed datasets
     imp <- AnalysisData %>% 
-                mutate_at(vars(plot, array), as.character) %>%
+            select(-LAI) %>%
+                mutate(across(plot:array, ~as.character(.))) %>%
                  mice(m=500, seed = 23109, print=F)
     
     imp_raw <- 

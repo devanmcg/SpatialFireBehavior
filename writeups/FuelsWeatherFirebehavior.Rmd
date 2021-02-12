@@ -16,9 +16,10 @@ output:
 knitr::opts_chunk$set(message = FALSE, warning=FALSE, 
                echo=FALSE, eval=TRUE, fig.path='figures/', dev=c('png', 'pdf')) 
 FilePath = "C:/Users/devan/GitHubProjects/SpatialFireBehavior"
-load(paste0(FilePath, '/data/AnalysisData.Rdata'))
+AnalysisData <- readr::read_csv(paste0(FilePath, "/data/AnalysisDataKY.csv"))
 load(paste0(FilePath, '/r objects/response_CIs.Rdata'))
 load(paste0(FilePath, '/r objects/imp_raw.Rdata'))
+load(paste0(FilePath, '/r objects/pca_ev.Rdata'))
 source(paste0(FilePath, '/r script/CustomThemes.R'))
 source("https://raw.githubusercontent.com/devanmcg/IntroRangeR/master/11_IntroMultivariate/ordinationsGGplot.R")
 ```
@@ -41,6 +42,10 @@ source("https://raw.githubusercontent.com/devanmcg/IntroRangeR/master/11_IntroMu
 The raw weather, fuels, and fire behavior data used here are available in [CSV format](https://github.com/devanmcg/SpatialFireBehavior/raw/main/data/fromMZ/CompiledData2.csv).  
 
 ```{r data_prep, eval=FALSE}
+###
+# Note: Data prep steps included for reference. 
+# Data used in analysis, AnalysisDataKY.csv, has been modified outside of
+# this script to update missing data from another spreadsheet. 
  AllData <-  
     read_csv(paste0(FilePath, "/data/fromMZ/CompiledData2.csv")) %>%
     filter(location != "OAK") %>%
@@ -123,12 +128,14 @@ The raw weather, fuels, and fire behavior data used here are available in [CSV f
       separate(FireCode, into = c("location", "block", "pasture", 
                            "patch", "year"), 
                remove = F)
+###
 ```
 
 ```{r fig.width = 10, fig.height = 8, fig.cap="A scatterplot matrix of all raw data used in this analysis."}
 # Scatterplot matrix  
-  GGally::ggpairs(AnalysisData, 
-                  columns = 9:18, 
+AnalysisData %>%
+  select(-LAI) %>%
+  GGally::ggpairs(columns = 9:18, 
                   upper = 'blank')
 ```
 
@@ -185,8 +192,27 @@ AnalysisData %>%
 ```
 
 Therefore I used the multiple imputation method in the **mice** package to fill in missing values. 
-The method creates 100 datasets, each with different but reasonable values for the missing data based on patterns in existing data, and performs the regression analysis on each. 
+The method creates 500 datasets, each with different but reasonable values for the missing data based on patterns in existing data, and performs the regression analysis on each. 
 These results are pooled into a single set of results. 
+
+```{r imp, eval=FALSE}
+# Calculate imputed datasets
+  imp <- AnalysisData %>% 
+          select(-LAI) %>%
+              mutate(across(plot:array, ~as.character(.))) %>%
+               mice(m=500, seed = 23109, print=F)
+
+# Return completed datset   
+  imp_raw <- 
+    complete(imp) %>%
+            as_tibble() %>% 
+              mutate(across(location:array, as.factor))
+    
+# Scale response variables for regression analysis   
+  imp_sc <- 
+    imp_raw %>%
+     mutate_at(vars(AirTemp:tHa), ~as.numeric(scale(., center=F)))
+```
 
 **Model specification** 
 
@@ -241,7 +267,7 @@ $e_s = 6.11 \cdot 10^{\frac{7.5 \cdot \text{Air temperature}}{237.3 + \text{Air 
     soil_ADMB <- glmmADMB::glmmadmb(SoilMaxC ~ RH + MaxWindSpeed +
                             FuelMoisture + tHa,
                           random = ~ 1|location/year/plot ,
-                          data=filter(imp_d, SoilMaxC <= 3.0),
+                          data=filter(imp_sc, SoilMaxC <= 3.9),
                           family="gamma",
                           link="log",  
                           admb.opts=glmmADMB::admbControl(shess = TRUE, 
@@ -264,7 +290,7 @@ $e_s = 6.11 \cdot 10^{\frac{7.5 \cdot \text{Air temperature}}{237.3 + \text{Air 
     canopy_ADMB <- glmmADMB::glmmadmb(MaxC ~ RH + MaxWindSpeed +
                                         FuelMoisture + tHa,
                           random = ~ 1|location/year/plot ,
-                          data=imp_d,
+                          data=imp_sc,
                           family="gamma",
                           link="log",  
                           admb.opts=glmmADMB::admbControl(shess = TRUE, 
@@ -287,7 +313,7 @@ $e_s = 6.11 \cdot 10^{\frac{7.5 \cdot \text{Air temperature}}{237.3 + \text{Air 
     ros_ADMB <- glmmADMB::glmmadmb(ros ~ RH + MaxWindSpeed +
                                     FuelMoisture + tHa,
                           random = ~ 1|location/year/plot ,
-                          data=imp_d,
+                          data=imp_sc,
                           family="gamma",
                           link="log",  
                           admb.opts=glmmADMB::admbControl(shess = TRUE, 
@@ -402,12 +428,9 @@ fb_d <-
 
 ## Variables associated with fire behavior
 
-**Rate of spread** significantly increased with windspeed ($z = 2.61, P = 0.01$) and decreased with greater fuel moisture content ($z = -3.92, P < 0.001$). 
-**Aboveground temperatures** in the plant canopy were lower with greater fuel moisture content ($z = -5.48, P < 0.001$) and increased with fuel load ($z = 5.16, P < 0.001$) and wind speed ($z = 2.10, P = 0.04$).
-**Temperature at the soil surface** had a statistically-significant inverse relationship with relative humidity ($z = -2.77, P < 0.01$), which likely indicates higher intensity fires that burn down through litter. 
-There was a marginally-significant trend for higher fuel moisture to reduce temperature at the soil surface, as well ($z = -1.85, P = 0.06$). 
-
-Further work should include quantifying total heat exposure via infrared sensors. 
+**Rate of spread** significantly increased with windspeed ($z = 3.24, P < 0.01$) and decreased with greater fuel moisture content ($z = -5.84, P < 0.001$). 
+**Aboveground temperatures** in the plant canopy were lower with greater fuel moisture content ($z = -6.45, P < 0.001$) and increased with fuel load ($z = 5.49, P < 0.001$) and wind speed ($z = 2.82, P < 0.01$).
+**Temperature at the soil surface** had a statistically-significant inverse relationship with relative humidity ($z = -2.52, P = 0.01$) and fuel moisture ($z = -3.22, P < 0.01$), which likely indicates higher-intensity fires that burn down through litter. 
 
 ```{r CI_gg, fig.width=8, fig.height = 3.75}
 # Plot confidence intervals
@@ -458,23 +481,23 @@ response_CIs %>%
          199)$factors
 ```
 
-No difference in fire behavior patterns between Hettinger and Central Grasslands. 
+No difference in fire behavior patterns between Hettinger and Central Grasslands; this is expected.
 
-```{r}
+```{r envfit, eval=FALSE}
 # Testing fire weather against PCA
-  envfit(fb_pca ~ MaxWindSpeed + AirTemp + dpC + RH + VPD, 
+ envfit(fb_pca ~ MaxWindSpeed + AirTemp + dpC + RH + VPD, 
          data = imp_raw, 
          choices = c(1:3), 
          strata = imp_raw$location)
 ```
 
-RH and VPD had a statistically-significant associations with variation in fire behavior, but even these relationships were weak. 
+```{r echo=FALSE}
+pca_ev
+```
+
+RH and VPD had statistically-significant associations with variation in fire behavior, but even these relationships were weak. 
 
 ```{r pca_dat}  
-  pca_v <- envfit(fb_pca ~ RH + VPD, imp_raw, 
-              choices = c(1:3), 
-              strata = imp_raw$location)
-
   # get ord data for ggplotting
   pca_gg <- gg_ordiplot(fb_pca, groups = imp_raw$location, 
                         plot=FALSE)
@@ -485,10 +508,12 @@ RH and VPD had a statistically-significant associations with variation in fire b
     as_tibble(rownames="response")
   
   # Vector 
-  pca_vd <- scores(pca_v,  "vectors") %>%
-            as.data.frame %>% 
-            round(3) %>%
-            as_tibble(rownames="gradient") 
+  pca_vd <- scores(pca_ev,  "vectors") %>%
+                as.data.frame %>% 
+                rownames_to_column("gradient") %>%
+              filter(gradient %in% c("RH", "VPD")) %>%
+              select(-PC3) %>%
+            as_tibble( ) 
   
   pca_scores <- lst(species=pca_spp, 
                     vectors=pca_vd)
@@ -498,7 +523,7 @@ RH and VPD had a statistically-significant associations with variation in fire b
     as_tibble()
 ```
 
-```{r pca_gg, fig.height=4, fig.width=6, fig.cap='Principal Components Analysis of fire behavior data (response variables in red) for prescribed burns on rangeland at Hettinger (H) and Central Grasslands  (CG) Research Extension Centers. No difference between locations and only the relative humidty (RH) gradient had a significant association with variation in fire behavior.' }
+```{r pca_gg, fig.height=4, fig.width=6, fig.cap='Principal Components Analysis of fire behavior data (response variables in red) for prescribed burns on rangeland at Hettinger (H) and Central Grasslands  (CG) Research Extension Centers. No difference between locations and only the vapor pressure deficit (VPD) and relative humidty (RH) gradients had significant associations with variation in fire behavior.' }
 # ggplot PCA
   ggplot() + theme_bw(16) + 
     labs(x="PC 1", 
@@ -557,6 +582,12 @@ RH and VPD had a statistically-significant associations with variation in fire b
           legend.position="none") 
 
 ```
+
+
+It is interesting that the gradient in temperature at the soil surface (SoilMaxC) is orthogonal to both canopy temperature and rate of spread (MaxC and ros, respectively). 
+This confirms trends observed in the regression analysis that the conditions most conducive to fast, high-intensity fires are not the same that result in surface heating. 
+
+Managers might be able to use high windspeeds to mitigate soil heating when fuels are dry, or focus on conditions with low RH to ensure litter burns down to the soil surface. 
 
 # Script
 

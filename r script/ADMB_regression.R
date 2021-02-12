@@ -10,7 +10,7 @@ load(paste0(getwd(), '/r objects/imp_sc.Rdata'))
     soil_ADMB <- glmmADMB::glmmadmb(SoilMaxC ~ RH + MaxWindSpeed +
                             FuelMoisture + tHa,
                           random = ~ 1|location/year/plot ,
-                          data = filter(imp_sc, SoilMaxC <= 3.0),
+                          data = filter(imp_sc, SoilMaxC <= 3.9),
                           family="gamma",
                           link="log",  
                           admb.opts=glmmADMB::admbControl(shess = TRUE, 
