@@ -17,7 +17,7 @@ FilePath = getwd()
     unite(timestamp, c(date, time), sep = " ") %>%
     mutate(timestamp = as.POSIXct(timestamp, format = "%Y-%m-%d %H:%M:%S")) %>%
     select(FireCode, timestamp, plot, array, TC, MaxC, 
-           AirTemp, RH, dpC, MaxWindSpeed, 
+           AirTemp, RH, dpC, WindSpeed, 
            LAI, FMC, KgHa) 
 
 # Isolate soil surface temperature (TC 4)
@@ -93,3 +93,5 @@ FilePath = getwd()
     select(-KgHa)
 
 # save(AnalysisData, file = paste0(FilePath, "/data/AnalysisData.Rdata"))
+  
+ # write_csv(AnalysisData, file = paste0(FilePath, "/data/AnalysisData.csv"))
