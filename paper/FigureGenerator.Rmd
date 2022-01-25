@@ -78,7 +78,7 @@ LongData <-
                         FuelMoisture = 'Fuel moisture (%)', 
                         tHa = 'Fuel load (t/ha)',
                         MaxC = 'Canopy temp (°C)', 
-                        WindSpeed = 'Wind speed (m/s)', 
+                        WindSpeed = 'Wind speed (km/h)', 
                         ros = 'Rate of spread (m/s)', 
                         SoilMaxC = 'Soil surface temp (°C)'), 
            location = recode(location, 

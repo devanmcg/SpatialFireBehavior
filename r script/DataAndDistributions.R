@@ -7,13 +7,19 @@ GGally::ggpairs(AnalysisData, columns = 9:17)
 # Distribution
 
 AnalysisData %>% 
-  ggplot(aes(x=ros)) + theme_bw(14) + 
+  ggplot(aes(x=ros/60)) + theme_bw(14) + 
   geom_histogram(aes(y=..density..),      
-                 binwidth=0.5,
+                 binwidth=0.01,
                  colour="black", 
                  fill="lightgreen") +
   geom_density(alpha=0.2, 
                fill="#FF6666") 
+
+AnalysisData %>%
+  filter(ros >= 2.5) %>%
+  select(FireCode, plot, array, MaxC, ros) %>%
+  arrange(desc(ros)) %>%
+  write_csv('HighestROS.csv')
 
 AnalysisData %>% 
   ggplot(aes(x=MaxC)) + theme_bw(14) + 

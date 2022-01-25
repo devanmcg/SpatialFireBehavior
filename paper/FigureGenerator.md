@@ -33,8 +33,8 @@ output:
 
 
 
-Figure  1: Violin plots of weather, fuel, and fire behavior response variables for fires in southwestern North Dakota (Hettinger, dark maroon) and central North Dakota (Central Grasslands, light blue) sampled from 2017 to 2019. Summary statistics include median (horizontal gray lines) and means (triangles).  
-![Figure  1: Violin plots of weather, fuel, and fire behavior response variables for fires in southwestern North Dakota (Hettinger, dark maroon) and central North Dakota (Central Grasslands, light blue) sampled from 2017 to 2019. Summary statistics include median (horizontal gray lines) and means (triangles).  ](FigureGenerator_files/figure-docx/data_summary_gg-1.png)
+Figure  1: Distribution of weather, fuel, and fire behavior data for fires in southwestern North Dakota (Hettinger, dark maroon) and central North Dakota (Central Grasslands, light blue) sampled from 2017 to 2019. Summary statistics include median (horizontal gray lines) and means (triangles).  
+![Figure  1: Distribution of weather, fuel, and fire behavior data for fires in southwestern North Dakota (Hettinger, dark maroon) and central North Dakota (Central Grasslands, light blue) sampled from 2017 to 2019. Summary statistics include median (horizontal gray lines) and means (triangles).  ](FigureGenerator_files/figure-docx/data_summary_gg-1.png)
 
 
 
