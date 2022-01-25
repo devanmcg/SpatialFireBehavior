@@ -877,9 +877,9 @@
 }
 
 @Article{vanbuuren2011,
-  author  = {Van Buuren, Stef and Groothuis-Oudshoorn, Karin},
-  journal = {Journal of statistical software},
-  title   = {mice: {Multivariate} imputation by chained equations in {R}},
+  author  = {{van} Buuren, Stef and Groothuis-Oudshoorn, Karin},
+  journal = {Journal of {Statistical} {Software}},
+  title   = {mice: {Multivariate} imputation by chained equations in \texttt{R}},
   year    = {2011},
   issn    = {1548-7660},
   number  = {1},
