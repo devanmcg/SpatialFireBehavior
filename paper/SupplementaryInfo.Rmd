@@ -7,6 +7,7 @@ header-includes:
   - \usepackage{amsmath}
   - \renewcommand{\familydefault}{\sfdefault}
   - \usepackage{hyperref}
+  - \usepackage{booktabs}
 output:
   pdf_document:
     highlight: tango
@@ -19,7 +20,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE,
 
 # Study locations 
 
-```{r map, eval = TRUE, out.width='100%', fig.align='center', fig.cap='Main map: Study locations (triangles) within two EPA level 3 ecoregions in North Dakota. Inset: State of North Dakota (dark blue) within the Great Plains (light blue) with respect to the continental United States. \\label{fig:map}'}
+```{r eval = TRUE, out.width='100%', fig.align='center', fig.cap='Main map: Study locations (triangles) within two EPA level 3 ecoregions in North Dakota. Inset: State of North Dakota (dark blue) within the Great Plains (light blue) with respect to the continental United States. \\label{fig:map}'}
 knitr::include_graphics('figures/map.png')
 ```
 \clearpage
@@ -55,6 +56,59 @@ otherwise, if $t_1 = t_2$, $\theta = 90$ and rate of spread $r$ is
 \begin{equation} \label{eq:simard3}
 r = D (\sqrt{3}/2)/({t_3 - t_1})
 \end{equation}
+
+# Additional results 
+
+## Fuel, weather, and fire behavior summaries
+
+```{r results='asis', eval = TRUE}
+pacman::p_load(tidyverse)
+    read_csv(url('https://raw.githubusercontent.com/devanmcg/SpatialFireBehavior/main/data/AnalysisDataKY.csv')) %>% 
+    select(-LAI, -JD, -MaxWindSpeed) %>%
+    mutate(ros = ifelse(ros >= 10, NA, ros), 
+           tHa = ifelse(tHa >=4, NA, tHa)) %>%
+    # convert units 
+    mutate(WindSpeed = WindSpeed * 0.28,  # km/hr to m/s
+           tHa = tHa * 0.1) %>%           # t/ha to kg/m^s
+    pivot_longer(cols = AirTemp:tHa, 
+                 names_to = 'var', 
+                 values_to = 'value') %>%
+    mutate(type = case_when(
+                    var %in% c('MaxC', 
+                               'SoilMaxC', 
+                               'ros') ~ 'Fire behavior', 
+                    var %in% c('tHa',
+                               'FuelMoisture') ~ 'Fuel', 
+                    TRUE ~ 'Weather' ), 
+           type = factor(type, levels = c('Fuel', 'Weather', 'Fire behavior')),
+           var = recode(var, 
+                        AirTemp = 'Air temperature ($^\\circ$C)', 
+                        RH = 'Relative humidity (\\%)', 
+                        dpC = 'Dew point ($^\\circ$C)', 
+                        FuelMoisture = 'Total fuel moisture (\\%)', 
+                        tHa = 'Fuel load (kg m$^{-2}$)',
+                        MaxC = 'Flame temp ($^\\circ$C)', 
+                        WindSpeed = 'Wind speed (m s$^{-1}$)', 
+                        ros = 'Rate of spread (m min$^{-1}$)', 
+                        VPD = 'Vapor pressure deficit',
+                        SoilMaxC = 'Soil surface temp ($^\\circ$C)'), 
+           location = recode(location, 
+                             H = "Hettinger", 
+                             CG = "Central Grasslands")) %>%
+  group_by(location, type, var) %>%
+    summarize(Mean = round(mean(value, na.rm = T), 1), 
+              SD = round(sd(value, na.rm = T), 2),
+              .groups = 'drop') %>%
+  mutate(value = paste0(Mean, ' ± ', SD)) %>%
+  rename(Variable = var) %>%
+      select(-Mean, -SD, -type) %>%
+  pivot_wider(names_from = location, 
+              values_from = value) %>%
+      xtable::xtable(caption = "Summary of fuel, weather, and fire behavior data collected from 25 fires in two locations in North Dakota. Fires in Hettinger were conducted in autumn, while those at Central Grasslands were conducted in spring.") %>%
+      print(include.rownames=FALSE, 
+            comment=FALSE, 
+            sanitize.text.function=function(x){x})
+```
 
 
 \clearpage 
@@ -129,7 +183,7 @@ r = D (\sqrt{3}/2)/({t_3 - t_1})
     arrange(ArrivalTime, .by_group = TRUE) %>% 
     mutate(position = order(order(ArrivalTime, decreasing=FALSE)), 
            position = recode(position, "1"="a", "2"="b", "3"="c"), 
-           ArrivalTime = as.numeric(ArrivalTime) /60 ) %>%
+           ArrivalTime = as.numeric(ArrivalTime) /60 ) %>% # converts to m/min!
     spread(position, ArrivalTime)  %>%
     ungroup %>% 
     # Apply equations from Simard et al. (1984)

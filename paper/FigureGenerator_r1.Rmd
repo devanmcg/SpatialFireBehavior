@@ -1,8 +1,8 @@
 ---
 output:
-  html_document
-#  word_document:
-#    reference_docx: word_template.docx
+  #html_document
+  word_document:
+    reference_docx: word_template.docx
 ---
 
 ```{r setup, echo=FALSE, warning=FALSE, message = FALSE, results='hide'}
@@ -51,16 +51,19 @@ load("C:/Users/devan.mcgranahan/GithubProjects/SpatialFireBehavior/r objects/pca
 
 ```{r }
 violin_cap <- f_nums(name = "violin_plots", 
-                   caption = "Distribution of weather, fuel, and fire behavior data for fires in southwestern North Dakota (Hettinger, dark maroon) and central North Dakota (Central Grasslands, light blue) sampled from 2017 to 2019. Summary statistics include median (horizontal gray lines) and means (triangles).  ")
+                   caption = "Distribution of weather, fuel, and fire behavior data for fires in southwestern North Dakota (Hettinger, dark maroon) and central North Dakota (Central Grasslands, light blue). Horizontal gray lines denote 25%, 50% (median) and 75% quantiles; triangles are arithmetic means. Means and standard deviation are also reported in Supplemental Information Table 1.")
 ```
 
 `r f_nums('violin_plots')`
-```{r data_summary_gg, fig.cap = violin_cap, fig.height=7.5, fig.width=6}
+```{r data_summary_gg, fig.cap = violin_cap, fig.height=8, fig.width=6}
 LongData <- 
     read_csv(url('https://raw.githubusercontent.com/devanmcg/SpatialFireBehavior/main/data/AnalysisDataKY.csv')) %>% 
     select(-LAI, -JD, -MaxWindSpeed) %>%
     mutate(ros = ifelse(ros >= 10, NA, ros), 
            tHa = ifelse(tHa >=4, NA, tHa)) %>%
+    # convert units 
+    mutate(WindSpeed = WindSpeed * 0.28,  # km/hr to m/s
+           tHa = tHa * 0.1) %>%           # t/ha to kg/m^s
     pivot_longer(cols = AirTemp:tHa, 
                  names_to = 'var', 
                  values_to = 'value') %>%
@@ -72,15 +75,15 @@ LongData <-
                                'FuelMoisture') ~ 'Fuel', 
                     TRUE ~ 'Weather' ), 
            var = recode(var, 
-                        AirTemp = 'Air temperature (°C)', 
-                        RH = 'Relative humidity (%)', 
-                        dpC = 'Dew point (°C)', 
-                        FuelMoisture = 'Fuel moisture (%)', 
-                        tHa = 'Fuel load (t/ha)',
-                        MaxC = 'Canopy temp (°C)', 
-                        WindSpeed = 'Wind speed (km/h)', 
-                        ros = 'Rate of spread (m/s)', 
-                        SoilMaxC = 'Soil surface temp (°C)'), 
+                        AirTemp = 'Air~temperature~(degree*C)', 
+                        RH = 'Relative~humidity~(\'%\')', 
+                        dpC = 'Dew~point~(degree*C)', 
+                        FuelMoisture = 'Total~fuel~moisture~(\'%\')', 
+                        tHa = 'Fuel~load~(kg~m^-2)',
+                        MaxC = 'Flame~temp~(degree*C)', 
+                        WindSpeed = 'Wind~speed~(m~s^-1)', 
+                        ros = 'Spread~rate~(m~min^-1)', 
+                        SoilMaxC = 'Soil~surface~temp~(degree*C)'), 
            location = recode(location, 
                              H = "Hettinger", 
                              CG = "Central Grasslands"))
@@ -96,7 +99,7 @@ LongData %>%
   filter(type == "Weather") %>%
   ggplot(aes(x = location, y= value,
              fill = location)) + theme_bw(14) +
-    geom_violin(draw_quantiles = 0.5, 
+    geom_violin(draw_quantiles = c(0.25, 0.5, 0.75), 
                 color = "darkgrey", 
                 size = 1) +
   geom_point(data = filter(ld_sums, type == "Weather"), 
@@ -109,7 +112,7 @@ LongData %>%
              stroke = 1.1) + 
   labs(y = NULL, x = NULL, 
        title = "Weather") + 
-  facet_wrap( ~ var, scales = 'free') +
+  facet_wrap( ~ var, scales = 'free', labeller=label_parsed) +
   scale_fill_manual(name = "Location", 
                     values = wes_cb1) + 
   theme(axis.text.x = element_blank(), 
@@ -121,7 +124,7 @@ LongData %>%
   filter(type == "Fuel") %>%
   ggplot(aes(x = location, y= value,
              fill = location)) + theme_bw(14) +
-        geom_violin(draw_quantiles = 0.5, 
+        geom_violin(draw_quantiles = c(0.25, 0.5, 0.75), 
                 color = "darkgrey", 
                 size = 1) +
   geom_point(data = filter(ld_sums, type == "Fuel"), 
@@ -134,7 +137,7 @@ LongData %>%
              stroke = 1.1) + 
   labs(y = NULL, x = NULL, 
        title = "Fuel") + 
-  facet_wrap( ~ var, scales = 'free') +
+  facet_wrap( ~ var, scales = 'free', labeller=label_parsed) +
   scale_fill_manual(name = "Location", 
                     values = wes_cb1) + 
   theme(axis.text.x = element_blank(), 
@@ -147,7 +150,7 @@ fb_d <-
            value <= 600) %>%
     ggplot(aes(x = location, y= value,
                fill = location)) + theme_bw(14) +
-          geom_violin(draw_quantiles = 0.5, 
+          geom_violin(draw_quantiles = c(0.25, 0.5, 0.75), 
                 color = "darkgrey", 
                 size = 1) +
   geom_point(data = filter(ld_sums, type == "Fire behavior"), 
@@ -160,7 +163,7 @@ fb_d <-
              stroke = 1.1) + 
     labs(y = NULL, x = NULL, 
          title = "Fire behavior") + 
-    facet_wrap( ~ var, scales = 'free') +
+    facet_wrap( ~ var, scales = 'free', labeller=label_parsed) +
     scale_fill_manual(name = "Location", 
                       values = wes_cb1) + 
     theme(axis.text.x = element_blank(), 
@@ -176,13 +179,18 @@ fb_d <-
     heights = c(0.35, 0.25, 0.35)  )
 ```
 
+\newpage 
+
 ```{r }
 pca_cap <- f_nums(name = "pca", 
-                   caption = "Principal Components Analysis of fire behavior data (response variables in blue; rate of spread (ROS), temperature above surface (canopy ºC), and temperature at soil surface (soil ºC) for prescribed burns on rangeland at Hettinger (H), in southwestern North Dakota, and Central Grasslands (CG), in central North Dakota. No difference between locations (P = 0.11). Total variance explained in these two axes = 86%. ")
+                   caption = "Principal Components Analysis of fire behavior data (response variables in blue; rate of spread (ROS), temperature above surface (flame ºC), and temperature at soil surface (soil ºC) for prescribed burns on rangeland at Hettinger (H), in southwestern North Dakota, and Central Grasslands (CG), in central North Dakota. No difference between locations (P = 0.11). Total variance explained in these two axes = 86%. ")
 ```
 
 `r f_nums('pca')`
 ```{r pca_gg, fig.height=4, fig.width=6.5, fig.cap=pca_cap }
+pca_scores$species <-
+  pca_scores$species %>%
+    mutate(response = str_replace_all(response, 'canopy', 'flame')) 
 # ggplot PCA
   ggplot() + theme_bw(16) + 
     labs(x="PC 1", 
@@ -243,17 +251,19 @@ pca_cap <- f_nums(name = "pca",
 
 ```
 
+\newpage 
+
 ```{r }
 CIs_cap <- f_nums(name = "CI_plots", 
-                   caption = "Regression coefficients and 95% confidence intervals for fuel and weather terms from models for maximum temperature at 15 cm above the soil surface (canopy), maximum temperature at the soil surface (soil) and rate of spread. ")
+                   caption = "Regression coefficients and 95% confidence intervals for fuel and weather terms from models for maximum temperature at 15 cm above the soil surface (flame), maximum temperature at the soil surface (soil), and rate of spread. ")
 ```
 
 `r f_nums('CI_plots')`
-```{r CI_gg, fig.cap = CIs_cap, fig.width=8, fig.height = 5}
+```{r CI_gg, fig.cap = CIs_cap, fig.width=8, fig.height = 4}
 # Plot confidence intervals
 response_CIs %>%
   mutate(response =case_when(
-                            response == "Temp. above surface" ~ "°C, canopy", 
+                            response == "Temp. above surface" ~ "°C, flame", 
                             response == "Temp. at surface" ~ "°C, soil", 
                             TRUE ~ response ), 
          term = str_replace_all(term, " ", "\n")  ) %>%

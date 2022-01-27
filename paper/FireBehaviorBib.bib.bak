@@ -42,14 +42,12 @@
 
 @Article{bidwell1992,
   author  = {Bidwell, Terrence G and Engle, David M},
-  journal = {Rangeland Ecology \& Management/Journal of Range Management Archives},
-  title   = {Relationship of fire behavior to tallgrass prairie herbage production.},
+  journal = {Journal of Range Management},
+  title   = {Relationship of fire behavior to tallgrass prairie herbage production},
   year    = {1992},
-  issn    = {1550-7424},
   number  = {6},
   pages   = {579--584},
   volume  = {45},
-  file    = {8786-8667-1-PB.pdf:C\:\\Users\\devan.mcgranahan\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\biis2e9c.default\\zotero\\storage\\HXQIU5ZF\\8786-8667-1-PB.pdf:application/pdf},
 }
 
 @Article{cheney1995,
@@ -389,7 +387,6 @@
   number  = {1},
   pages   = {2--10},
   volume  = {54},
-  file    = {Engle and Bidwell - 2001 - The response of central North American prairies to.pdf:C\:\\Users\\devan.mcgranahan\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\biis2e9c.default\\zotero\\storage\\P7D9A5FX\\Engle and Bidwell - 2001 - The response of central North American prairies to.pdf:application/pdf},
 }
 
 @Article{cowan2020,
@@ -495,17 +492,13 @@
 }
 
 @Article{mcgranahan2021b,
-  author   = {McGranahan, Devan Allen},
-  journal  = {Rangeland Ecology and Management},
-  title    = {{FeatherFlame}: {An} {Arduino}-based thermocouple datalogging system to record wildland fire flame temperatures \textit{in agris}},
-  year     = {2021},
-  issn     = {1550-7424},
-  pages    = {43--47},
-  volume   = {76},
-  abstract = {Rangeland scientists have long relied on thermocouples for measuring temperature, especially in agris—in the field, under the extreme conditions of wildland fire. But the electronics required to sense and record thermocouple data remain expensive to both purchase and protect from exposure to heat and flames. Open-source, do-it-yourself (DIY) electronics platforms such as Arduino are increasingly popular among ecologists, and have been shown to perform as well as proprietary commercial systems when recording thermocouple data. The FeatherFlame system is a reliable, low-cost solution to sampling wildland fire, ranging from US\$240–490 for 1–6 thermocouple sensors, including all fire protection equipment. The low cost and multi-sensor capacity facilitates spatial replication, which allows fire ecologists to measure and report meaningful data on rate of spread and calculate fire intensity.},
-  doi      = {https://doi.org/10.1016/j.rama.2021.01.008},
-  keywords = {\#FireScienceDIY, Open-source ecology, Rate of spread, Robust wildland fire science, Thermocouple deployment},
-  url      = {https://www.sciencedirect.com/science/article/pii/S1550742421000087},
+  author  = {McGranahan, Devan Allen},
+  journal = {Rangeland Ecology and Management},
+  title   = {{FeatherFlame}: {An} {Arduino}-based thermocouple datalogging system to record wildland fire flame temperatures \textit{in agris}},
+  year    = {2021},
+  pages   = {43--47},
+  volume  = {76},
+  doi     = {10.1016/j.rama.2021.01.008},
 }
 
 @Article{mcgranahan2020,
@@ -570,30 +563,24 @@
 
 @Article{patten1984,
   author  = {Patten, Duncan T and Cave, George H},
-  journal = {Rangeland Ecology \& Management/Journal of Range Management Archives},
-  title   = {Fire temperatures and physical characteristics of a controlled burn in the {Upper} {Sonoran} {Desert}.},
+  journal = {Journal of Range Management},
+  title   = {Fire temperatures and physical characteristics of a controlled burn in the {Upper} {Sonoran} {Desert}},
   year    = {1984},
-  issn    = {1550-7424},
   number  = {3},
   pages   = {277--280},
   volume  = {37},
-  file    = {7333.pdf:C\:\\Users\\devan.mcgranahan\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\biis2e9c.default\\zotero\\storage\\XM26BMZ5\\7333.pdf:application/pdf},
 }
 
 @Article{whittaker1961,
-  author   = {Whittaker, Edith},
-  journal  = {The Journal of Ecology},
-  title    = {Temperatures in {Heath} {Fires}},
-  year     = {1961},
-  issn     = {00220477},
-  month    = oct,
-  number   = {3},
-  pages    = {709},
-  volume   = {49},
-  doi      = {10.2307/2257233},
-  language = {en},
-  url      = {https://www.jstor.org/stable/2257233?origin=crossref},
-  urldate  = {2018-12-24},
+  author  = {Whittaker, Edith},
+  journal = {The Journal of Ecology},
+  title   = {Temperatures in heath fires},
+  year    = {1961},
+  month   = oct,
+  number  = {3},
+  pages   = {709},
+  volume  = {49},
+  doi     = {10.2307/2257233},
 }
 
 @Article{engle1984,
@@ -840,20 +827,17 @@
   number  = {4},
   pages   = {2061--2079},
   volume  = {122},
-  url     = {https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1002/2016JD025855},
 }
 
 @Article{dorrough2007,
-  author   = {Dorrough, Josh and Ash, Julian and Bruce, Sarah and McIntyre, Sue},
-  journal  = {Plant Ecology},
-  title    = {From plant neighbourhood to landscape scales: how grazing modifies native and exotic plant species richness in grassland},
-  year     = {2007},
-  issn     = {1385-0237},
-  number   = {2},
-  pages    = {185--198},
-  volume   = {191},
-  keywords = {Biomedical and Life Sciences},
-  url      = {http://dx.doi.org/10.1007/s11258-006-9236-y},
+  author  = {Dorrough, Josh and Ash, Julian and Bruce, Sarah and McIntyre, Sue},
+  journal = {Plant Ecology},
+  title   = {From plant neighbourhood to landscape scales: how grazing modifies native and exotic plant species richness in grassland},
+  year    = {2007},
+  number  = {2},
+  pages   = {185--198},
+  volume  = {191},
+  doi     = {10.1007/s11258-006-9236-y},
 }
 
 @Article{orlanski1975,
@@ -1104,6 +1088,59 @@
   month     = nov,
   pages     = {1--15},
   publisher = {Millpress},
+}
+
+@Article{sayre2005,
+  author  = {Sayre, Nathan F},
+  journal = {Progress in Human Geography},
+  title   = {Ecological and geographical scale: parallels and potential for integration},
+  year    = {2005},
+  issn    = {0309-1325},
+  number  = {3},
+  pages   = {276--290},
+  volume  = {29},
+}
+
+@Article{cacciapaglia2012,
+  author  = {Cacciapaglia, Michael A and Yung, Laurie and Patterson, Michael E},
+  journal = {Society \& Natural Resources},
+  title   = {Place mapping and the role of spatial scale in understanding landowner views of fire and fuels management},
+  year    = {2012},
+  issn    = {0894-1920},
+  number  = {5},
+  pages   = {453--467},
+  volume  = {25},
+}
+
+@Article{fernandes2000,
+  author  = {Fernandes, Paulo M and Catchpole, Wendy R and Rego, Francisco C},
+  journal = {Canadian Journal of Forest Research},
+  title   = {Shrubland fire behaviour modelling with microplot data},
+  year    = {2000},
+  number  = {6},
+  pages   = {889--899},
+  volume  = {30},
+}
+
+@Article{sneeuwjagt1977,
+  author  = {Sneeuwjagt, Richard J and Frandsen, William H},
+  journal = {Canadian Journal of Forest Research},
+  title   = {Behavior of experimental grass fires vs. {predictions} based on {Rothermel's} fire model},
+  year    = {1977},
+  number  = {2},
+  pages   = {357--367},
+  volume  = {7},
+}
+
+@Article{clements2019,
+  author    = {Clements, Craig B and Kochanski, Adam K and Seto, Daisuke and Davis, Braniff and Camacho, Christopher and Lareau, Neil P and Contezac, Jonathan and Restaino, Joseph and Heilman, Warren E and Krueger, Steven K and others},
+  journal   = {International Journal of Wildland Fire},
+  title     = {The {FireFlux} {II} experiment: a model-guided field experiment to improve understanding of fire--atmosphere interactions and fire spread},
+  year      = {2019},
+  number    = {4},
+  pages     = {308--326},
+  volume    = {28},
+  publisher = {CSIRO Publishing},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

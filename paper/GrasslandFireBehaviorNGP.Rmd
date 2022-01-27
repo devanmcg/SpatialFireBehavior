@@ -20,6 +20,7 @@ Few studies consider rate of spread or statistically test the influence of fire 
 We measured fuel load and moisture ahead of prescribed fires in North Dakota, USA, and used a multi-channel thermocouple array to measure rate of spread, soil surface temperature, and flame temperature, which we compared with fire weather data.
 Aboveground flame temperatures averaged 225$^\circ$C during spring burns in and 250$^\circ$C during fall burns.
 Surface temperatures averaged just above 100$^\circ$C, although 50% of observations were 60$^\circ$C or less.
+Fires spread at an average of 2.5 m min$^{\text{-}1}$. 
 Regression analysis indicated that wind speed drove faster rates of spread while higher fuel loads and lower overall fuelbed moisture produced higher flame temperatures.
 None of our measurements explained variability in soil surface temperature, likely because ground-level heating remained low.
 We highlight differential responses among fire behavior metrics to different components of the wildland fire environment.
@@ -39,11 +40,11 @@ Wind speed has long been recognized as a primary driver of fire behavior, especi
 Two measures of atmospheric moisture content—relative humidity and vapor pressure deficit—are also associated with fire growth [@evett2008; @reid2010; @sedano2014].
 
 *Biotic factors* relate principally to the amount and nature of plant biomass available for combustion. 
-Overall, fire spread and energy release rates increase as more fuel is available to burn; the structure and arrangement of vegetation is also important. 
+Overall, energy release rates increase as more fuel is available to burn; the structure and arrangement of vegetation is also important. 
 Greater fuel load attributable to longer time-since-fire increases fire temperature, and spatial variability in fuel load and patchy distribution of fine fuels in turn drive variability in fire behavior [@patten1984; @gibson1990; @gomes2020].
 Furthermore, fine-leaved grasses burn more completely and hotter than an equal mass of forbs [@wragg2018].
 Finally, fuel moisture content is an especially important driver outside of the highly-cured context of wildfire seasons [@sparling1966; @kidnie2015]. 
-Together, variability in flammability traits and curing rates among species that comprise grassland fuelbeds contributes to variability in fire behavior [@mcgranahan2016; @cardoso2018]. 
+Together, variability in flammability traits and curing rates among species that comprise grassland fuelbeds contributes to variability in fire behavior [@cruz2015; @kidnie2015; @mcgranahan2016; @cardoso2018]. 
 
 How and where within the wildland fire environment fire behavior measurements are made matters a great deal to assessing fire effects. 
 For decades, fire ecologists have measured fire behavior as *flame temperature* via various methods, including arrays of temperature-sensitive paints [e.g., @whittaker1961; @smith1966; @bailey1980] or by recording air temperature as a flame front passes over a thermocouple connected to a datalogger [e.g., @strong2013; @russell2015]. 
@@ -65,7 +66,7 @@ Mean temperatures in experimental burns in eastern Montana ranged from 172-222$^
 To our knowledge, no studies on grassland fire in the northern Great Plains region has explicitly tested the effect of fire weather on fire behavior. 
 
 Our objectives were to (1) describe the range of variability in three measures of fire behavior—rate of spread, soil surface temperature, and flame temperature 15 cm above soil surface—during prescribed burns in typical fuelbeds of the northern US Great Plains, and (2) explain variability in fire behavior in terms of abiotic and biotic conditions. 
-Our analysis emphasizes the differential effects of environmental variables among the three responses, and the multidimensional relationship among these different measures of grassland fire behavior. 
+Our analysis emphasizes the differential effects of environmental variables among the three responses, and the multidimensional relationship among these different measures of grassland fire behavior during prescribed burns conducted at scales consistent with land management in the region. 
 
 # Methods 
 
@@ -73,7 +74,7 @@ Our analysis emphasizes the differential effects of environmental variables amon
 
 We sampled 25 prescribed fires at two locations in central and southwestern North Dakota, USA (Maps in Supplemental Information Figure 1). 
 At both locations, sampled grasslands are included in a patch-burn grazing study that requires a portion of each experimental unit to be burned each year [@spiess2020]. 
-Fire sizes ranged from 8-16 ha. 
+The majority of the burn units were 16 ha, while a small set were 8 ha. 
 Typical ignition patterns consisted of downwind backing fires followed by either ring ignition and primarily head fire spread, when fuels were conducive; when fuels were sparse or higher-moisture, flanking fires and strip ignitions were employed as necessary to ensure fire spread through the entire burn unit. 
 
 In central North Dakota, we sampled 15 spring (May) fires at the North Dakota State University Central Grassland Research Extension Center near Streeter, ND (46.718686 N, 99.448521 W). 
@@ -89,7 +90,7 @@ Located in a shortgrass prairie ecoregion, these pastures are dominated by intro
 
 We measured each fire with a set of 9, 1 m equilateral triangle plots arranged in a nested fashion such that three 10 m triangles, each containing 3, 1m plots, were placed 100 m apart to form a total plot area of 0.433 ha with 27 sample points positioned at the centroid of each burn unit (A detailed schematic of this layout is presented in Supplemental Information Figure 2). 
 This fractal design is modified from the Sierpinksi triangle described by @dorrough2007 and applied to measuring wildland fire spread by @mcgranahan2021b.
-Although the logarithmically-scaled nested design was intended for geospatial analysis of point-level data, for our analyses here we calculate averages from the finest (1 m) scale. 
+Although the logarithmically-scaled nested design was intended for geospatial analysis of point-level data, for our analyses here we calculate averages from the finest (1 m) scale, consistent with the method of locating multiple microplots within larger burned areas to characterize spatial variability within fires [@fernandes2000]. 
 
 **Fuel data** were collected no more than three hours prior to fire ignition. 
 We clipped and collected all fuels in a 25 × 25 cm quadrat positioned 0.5 m away from each 1 m triangle vertex; the three measurements per plot were averaged prior to analysis. 
@@ -97,19 +98,18 @@ Fuel samples were initially placed in airtight plastic bags to retain moisture, 
 These data were used to calculate percent fuel moisture content (expressed on a dry-weight basis) and fuel load (kg m$^{2}$) for each plot (n = 9 subsamples for each fire). 
 
 **Fire behavior data** were recorded as temperature ($^\circ$C) associated with the advancing flame front at each of the 27 points arranged in 9, 1 m triangles at the center of each burn unit.
-Data were recorded with the open-source FeatherFlame thermocouple datalogger system [@mcgranahan2021b].
-Briefly, the FeatherFlame system reads overbraided, ceramic fiber-insulated K-type thermocouples (Omega, Norwalk, CT) connected to an Arduino-based datalogger assembled from Adafruit Feather breakout boards (M0 Adalogger, datalogging shield, and OLED display; Adafruit Industries, LLC, New York City, NY) and housed inside water-resistant Pelican cases (Pelican Products, Inc, Torrance, California). 
+Data were recorded with the open-source FeatherFlame thermocouple datalogger system [@mcgranahan2021b], logging at 1.5 Hz.
+Briefly, the FeatherFlame system reads overbraided, ceramic fiber-insulated, 20-gauge K-type thermocouples (Omega, Norwalk, CT) connected to an Arduino-based datalogger assembled from Adafruit Feather breakout boards (M0 Adalogger, datalogging shield, and OLED display; Adafruit Industries, LLC, New York City, NY) and housed inside water-resistant Pelican cases (Pelican Products, Inc, Torrance, California). 
 The low cost of open-source systems make multiple units more affordable than proprietary data loggers with no sacrifice in data quality [@mcgranahan2021]. 
 
 At each 1-m triangle—the individual observational unit in the nested plot design—we used four thermocouples connected to a single FeatherFlame datalogger.
 Three thermocouples measured flame temperature 15 cm above the soil surface at each 1 m vertex while a fourth thermocouple recorded soil surface temperature at a representative point within the 1 m array.
 Beads of the thermocouple probes extended at least 3 cm from the supporting apparatus, to which the insulated lead was attached with wire. 
 The soil thermocouple was placed on mineral ground, perpendicular to the soil surface, below plant litter. 
-Dataloggers recorded thermocouple temperatures at 1.5 Hz.  
 
 For each fire event, we determined the time and value of the maximum temperature ($^\circ$C) as the flame front encountered each thermocouple. 
-We calculated the Maximum flame temperature ($^\circ$C) 15 cm above soil surface for each plot as the mean of the thermocouple readings from its vertices. 
-We calculated the rate of spread (m min$^{\text{-}1}$) of the flame front as it passed through each plot using the maximum temperature timestamps following equations from @simard1984, which are presented in full in Supplemental Information. . 
+We calculated the maximum flame temperature ($^\circ$C) 15 cm above soil surface for each plot as the mean of the thermocouple readings from its vertices. 
+We calculated the rate of spread (m min$^{\text{-}1}$) of the flame front as it passed through each plot using the maximum temperature timestamps following equations from @simard1984, which are presented in full in Supplemental Information.  
 
 **Fire weather data** were obtained after each fire from records made available by the North Dakota Agriculture Weather Network, the statewide mesonet system with sensor arrays at both experimental stations. 
 We downloaded hourly relative humidity (%), dew point ($^\circ$C), air temperature ($^\circ$C), and average wind speed (m s$^{\text{-}1}$).
@@ -147,13 +147,13 @@ Dew point was marginally related (p < 0.05) and inversely associated with flame 
 Fires at both locations were characterized by considerable variability among sub-plots. 
 Above the soil surface, half of the fires (13) exceeded 325$^\circ$C, but only four of those fires had >50% of individual sample plots within the burns reach an average of 325$^\circ$C. 
 Sparse fuels meant that fire did not spread to some individual plots in some burns despite strip ignitions.
-Among plots that burned, less than half exceeded 100$^\circ$C at the soil surface (49 of 121 plots).
-A majority of the 21 fires had at least one plot exceed 100$^\circ$C at the soil surface (18 of 21 fires), seven had over half of the plots exceed 100$^\circ$C at the soil surface and only one fire had all plots reach this (a spring Central Grasslands fire). 
-Only 10 fires reached 325$^\circ$C on the soil surface, with most of these fires reaching this point in only one plot and never in more than half of the plots.
+Among plots that burned, fewer than half exceeded 100$^\circ$C at the soil surface (49 of 121 plots).
+A majority of the fires (18) had at least one plot exceed 100$^\circ$C at the soil surface, seven had over half of the plots exceed 100$^\circ$C at the soil surface, and only one fire had all plots reach this (a spring Central Grasslands fire). 
+Only 10 fires reached or exceeded 325$^\circ$C on the soil surface, with most of these fires reaching this point in only one plot and never in more than half of the plots.
 
 The effects of fuel and fire weather predictor variables varied across the three response variables (Fig. 3). 
 Fires spread faster with higher wind speeds (t = 2.92, P < 0.01), but no other variable had a statistically-significant association with rate of spread (Table 1). 
-Aboveground temperatures increased as fuel load increased (t = 2.82, P = 0.01) and decreased as fuel moisture increased (t = -2.16, P = 0.04). 
+Aboveground flame temperatures increased as fuel load increased (t = 2.82, P = 0.01) and decreased as fuel moisture increased (t = -2.16, P = 0.04). 
 No fuel or weather variable included here had statistically-significant associations with soil surface temperature (Table 1). 
 
 # Discussion
@@ -177,16 +177,17 @@ Discrepancies between our data and others reported in the region are consistent 
 For example, @ohrtman2015 reported a wide range of maximum temperatures at the soil surface---150-500$^\circ$C---that was generally explained by variability in annual productivity and clipping frequency. 
 Our fires were also cooler than those reported by @archibold2003 in Saskatchewan: using the mid-point of observations made at 10 cm and 20 cm as a comparison, spring fires reached 314$^\circ$C and fall fires reached 298$^\circ$C. 
 But @archibold2003 also reported substantially lower fuel moisture in each season and they had approximately three times the fuel load, likely due to an absence of grazing management on the remnant prairie. 
-A previous study reported similar results---temperatures approaching 500$^\circ$C when fuel loads averaged 2.8-4.5 t$\cdot$ha$^{\text{-}1}$ [@archibold1998]. 
+A previous study reported similar results---temperatures approaching 500$^\circ$C when fuel loads averaged 2.8-4.5 t ha$^{\text{-}1}$ [@archibold1998]. 
 With greater variability in fuel load and fuel moisture, we might also expect to see these factors have greater influence on aboveground flame temperatures. 
-For example, in Colorado, @augustine2014 observed a strong linear relationship between fuel load and  temperatures ranging from 60-200$^\circ$C, but their fuel load also ranged from 0.2 to 1.2 t$\cdot$ha$^{\text{-}1}$.  
+For example, in Colorado, @augustine2014 observed a strong linear relationship between fuel load and  temperatures ranging from 60-200$^\circ$C, but their fuel load also ranged from 0.2 to 1.2 t ha$^{\text{-}1}$.  
 
-Although one must look beyond the northern Great Plains for comparable data on fire spread, our results are consistent with international reports. 
-For example, our data match the pattern from Australian grassland, where @cheney1993 found a statistical relationship between rate of spread and both wind speed and fuel moisture, but not total fuel load. 
-Their fires traveled at rates similar to the vast majority of ours (1-2 m$\cdot$s$^{\text{-}1}$), with slightly higher fuel loads and slightly lower relative humidity. 
-Wind was by far their most important variable, followed by dead fuel moisture, consistent with patterns in our data. 
-Likewise, @cruz2015 observed fire spread rates up to 2 m$\cdot$s$^{\text{-}1}$ in fully-cured grassland fuels with fuel loads at the upper end of our samples.  
-In comparing our results to these studies, it appears the trigonometric method of calculating rate of spread through the thermocouple array [@simard1984] overestimates rate of spread, but there is no indication that using this measure of spread as a scaled response variable in regression models presents error in interpreting the relative effect of fuel and weather predictors. 
+Fires at both of our locations spread much more slowly than most reports from other grasslands, due primarily to high fuelbed moisture content and little opportunity for mitigation by wind or dry air (Fig. 1). 
+Perhaps the most variability in fire spread was reported by @sneeuwjagt1977 from prescribed grass fires in California and Washington, where rates of spread ranged from 0.2-61 m min$^{\text{-}1}$.
+From grassland fires in South Africa and Kansas, USA, @trollope2002 reported average spread rates of 24 and 32 m min$^{\text{-}1}$, respectively, for head fires and 0.12 and 0.14 m min$^{\text{-}1}$, respectively, for back fires. 
+In a tallgrass prairie in Texas, @clements2019 recorded fire spreading between 72-150 m min$^{\text{-}1}$ with the wind and 48 m min$^{\text{-}1}$ for flanking fires.
+Likewise, fires through cured grass fuelbeds in Australia spread much more rapidly than we observed---up to 18-180 m min$^{\text{-}1}$ [@cheney1993; @cheney1995; @cruz2015]. 
+Through partially-cured stands, though, @cruz2015 found spread rates dropped to 3-44 m min$^{\text{-}1}$, approaching our location averages of 2.1 and 3.1 m min$^{\text{-}1}$. 
+Consistent with our finding that only wind speed had a statistically-significant effect on increasing rate of spread (Fig. 3), @cheney1993 found that wind was by far the most important variable to spread rate. 
 
 Interestingly, @cheney1993 found that fires spread faster in undisturbed pastures compared to those that had been cut, which they attribute to differences in fuel structure (height, bulk density) rather than fuel load. 
 This might have implications for fire behavior in our region, where invasive species like *Poa pratensis* generally increase aboveground plant biomass but do so by adding thick dense litter at the soil surface, rather than standing dead fuel in the plant canopy [@gasch2020]. 
@@ -198,9 +199,9 @@ One would expect, then, that back fires would have more opportunity to burn down
 Unfortunately, our results offer little insight into what fuel or weather variables enhance litter combustion, likely because most of our fires never got very hot at the soil surface---50% of our observations were less than 60$^\circ$C, and 60% less than 100$^\circ$C (Fig. 1). 
 Nor can we differentiate the direction of fire spread with the current trigonometry applied to the triangular thermocouple arrays [@simard1984], although it would theoretically be possible to compare spread direction to wind direction if the latter data were available at a fine enough scale. 
 
-The functional difference between head and back fires in the fuelbeds reported here are likely. 
+The functional difference between head and back fires in the fuelbeds reported here is likely moot.
 Because our fuels were often sparse, sometimes only marginally cured, and prescriptions precluded taking advantage of higher wind or lower relative humidity to mitigate fuel limitations, we often employed substantial interior ignitions using strip, point, flanking, and spiral patterns that sent flame fronts towards our sensors in all possible directions at different times. 
-While @williams2015 did show that different ignition patterns created additional spatial variability in fire behavior, the effect of shorter line ignitions and spot ignitions was to mitigate the high severity of wildfire and long line ignitions in highly-flammable spinifex fuelbeds.   
+While @williams2015 did show that different ignition patterns created additional spatial variability in fire behavior, the effect of shorter line ignitions and spot ignitions was to mitigate the high severity of wildfire and long line ignitions in highly-flammable spinifex fuelbeds.
 In our case, we had to manipulate ignition pattern just to get fire to carry.
 Our data are certainly useful in describing the variability in fire behavior across these burns, but do not inform the relationship between ignition pattern and fire behavior. 
 Thus, future research on fire behavior in the northern Great Plains should (1) use experimental plots with consistent fuelbeds to explicitly compare head and back fires set via line ignitions, akin to the experimental burning program described by @cruz2015 in Australia, and (2) attempt to at least address severity, if not fire behavior, in wildfire scenarios via remote sensing and/or modelling. 
@@ -209,12 +210,12 @@ A more detailed analysis of fuelbed effects on fire behavior also ought to separ
 Explicitly measuring litter moisture might also be valuable, especially when variability in belowground heating is expected to influence first-order fire effects. 
 We report here the overall fuel moisture content of the entire fuelbed, consistent with descriptive, post hoc statistical approaches to describing fire behavior [@trollope1978; @trollope1985; @bidwell1992; @trollope2002; @mcgranahan2016].
 But predictive fire behavior models accommodate inputs for live and dead fuel categories [@scott2005], and @kidnie2015a found that four categories of live, dead, and senescent fuels best represented differences in grassland fuel moisture scenarios. 
-With this in mind, @cruz2015 employed a hybrid approach in which fuel moisture was measured for the various components, from which a weighted average was used as a predictor variable in regression analysis. 
+With this in mind, @cruz2015 employed a hybrid approach in which fuel moisture was measured for the various components, from which a weighted average was used as a predictor variable in regression analysis.
+They subsequently found that overall degree of curing, not simply live fuel moisture, was the most important variable in explaining the dampening effect of fuel moisture on fire behavior. 
 
 Often, time and resource constraints preclude the separation of fine plant material by live and dead class, and overall fuelbed moisture content is the best available data for managers. 
 Although parsing live and dead fuel moisture in the present analysis would probably not better explain variability in our dataset, it would likely contribute to better predictions of fire behavior relative to management objectives if information on overall fuelbed moisture content were available prior to ignition. 
-Unfortunately, the standard clipping and drying method is not compatible with providing day-of fuel moisture data, and visual assessments based on color tend to over-predict curedness [@kidnie2015a]. 
-However, electronic devices can provide accurate and instantaneous measurements of grassland fuel moisture [@mcgranahan2019]. 
+Unfortunately, the standard clipping and drying method is not compatible with providing day-of fuel moisture data, and visual assessments based on color tend to over-predict curedness [@kidnie2015a]. However, electronic devices can provide accurate and instantaneous measurements of grassland fuel moisture [@mcgranahan2019]. 
 
 Research must also address the influence of atmospheric moisture conditions on prescribed fire behavior.
 Several broad-scale, post-hoc analyses of wildfire conditions conclude that atmospheric moisture is an important driver of burned area [@evett2008; @reid2010; @sedano2014]. 
@@ -232,7 +233,7 @@ To our knowledge, no other study in the northern Great Plains has reported the b
 Integrating research into management almost invariably requires trade-offs; two already discussed above include (1) measuring only the overall moisture content of the entire fuelbed, being precluded from parsing fuel into live, dead, and litter components, and (2) measuring two-dimensional rate of spread of fire fronts within the burn unit without being able to associate them with wind direction. 
 But these are the respective conditions under which prescribed fire managers in the region decide whether to burn, and ensure fire spread objectives are met. 
 Research conducted at the spatial scales at which management occurs helps managers trust the transfer of knowledge from studies to working landscapes [@sayre2005; @cacciapaglia2012].
-Critically, all of our sensors were greater than 50 m from the initial fire line, identified in simulations as a 
+For example, all of our fire behavior measurements were made more than 50 m from the initial fire line, the distance identified in simulations and used in wildland fire science to allow flame fronts to achieve a quasi steady state in spread rate [@fernandes2000; @sutherland2020], which is obviously precluded in studies that employ small plots.
 
 # Acknowledgements
 
