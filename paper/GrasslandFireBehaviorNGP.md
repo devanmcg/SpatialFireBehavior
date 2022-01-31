@@ -9,32 +9,21 @@ csl: ijwf.csl
 bibliography: FireBehaviorBib.bib
 ---
 
-```{r setup, include=FALSE, eval = TRUE}
-knitr::opts_chunk$set(echo = FALSE, eval = FALSE)
-```
+
 
 # Abstract 
 
-**Background:** 
 Fuel and weather interact to affect wildland fire behavior, but little is known about associations between these variables in the northern Great Plains of North America. 
-Few studies consider rate of spread or statistically test the influence of fuel and weather. 
-
-**Methods:** 
-We measured overall fuel load and moisture ahead of prescribed fires in North Dakota, USA, and used a thermocouple array to measure rate of spread, soil surface temperature, and aboveground flame temperature, to compare with fire weather data. 
-
-**Key results:** 
-Flame temperatures averaged 225$^\circ$C during spring burns and 250$^\circ$C during fall burns, and were generally higher with greater fuel loads and lower overall fuelbed moisture. 
-Surface temperatures averaged ~100$^\circ$C, although 50% of observations were ≤60$^\circ$C. 
-Fires spread at an average of 2.5 m min$^{\text{-}1}$, increasing with wind speed.  
-
-**Conclusions:** 
-Prescribed fire in northern Great Plains working rangeland spreads slowly and effects low soil surface temperatures, often limited by high fuelbed moisture. 
-Fire behavior measurements respond differently to variability in fuel and weather. Belowground heating is likely minimal.
-
-**Implications:** 
-Ecologists, consider which fire behavior measurements best relate to fire effects. 
-Managers, consider weather and ignition pattern mitigations when fuels constrain desired fire behavior to ensure effective burns. 
-
+Few studies consider rate of spread or statistically test the influence of fuel and weather.
+We measured overall fuel load and moisture ahead of prescribed fires in North Dakota, USA, and used a thermocouple array to measure rate of spread, soil surface temperature, and aboveground flame temperature, which we compared with fire weather data.
+Flame temperatures averaged 225$^\circ$C during spring burns and 250$^\circ$C during fall burns.
+Surface temperatures averaged just above 100$^\circ$C, although 50% of observations were 60$^\circ$C or less.
+Fires spread at an average of 2.5 m min$^{\text{-}1}$. 
+Regression analysis indicated that fire spread increased with wind speed, while flame temperatures were higher with greater fuel loads and lower overall fuelbed moisture.
+None of our measurements explained variability in soil surface temperature, likely because ground-level heating remained low.
+We highlight differential responses among fire behavior metrics to different components of the wildland fire environment.
+Results help managers match prescribed burn conditions to desired outcomes, and fire ecologists match measurements of the fire environment to their ecological responses of interest.
+We also discuss remaining knowledge gaps in how management and ignition patterns interact to create variability in fire behavior.
 
 **Key words:** Grassland fire ecology and management; Prescribed fire; Rangeland fire management; Robust wildland fire science; Wildland fire science in working landscapes
 
@@ -132,16 +121,16 @@ We found a high degree of consistency between these meso-scale data and fire wea
 ## Data analysis
 
 Prior to analysis, we ensured statistical power across 167 observational units by using multiple imputation to interpolate missing datapoints, as missing field data occurred for three rate of spread samples (2% of total), 29 fuel load values (17%), and 46 soil surface temperature values (27%) due to logistical and time constraints during the operational burn periods. 
-We used the multiple imputation method in the *mice* package [@vanbuuren2011] in the R statistical environment [@rct2020] to fill in these missing values. 
+We used the multiple imputation method in the *mice* package [@vanbuuren2011] in the \texttt{R} statistical environment [@rct2020] to fill in these missing values. 
 The procedure simulated 50 datasets with different, but reasonable, values for the missing data based on patterns in the existing data. 
 We then scaled all variables to a common range within each imputed dataset, performed regression analysis on each *mice*-generated dataset, and report composite statistical results pooled from the results of the 50 individual regression models. 
 
 **Multivariate analysis.---**We first conducted a multivariate analysis to assess composite relationships among the fuel, weather, and fire behavior responses. 
-We used Principal Components Analysis (PCA) fit with the 'rda' function in the *vegan* package for R [@oksanen2017].
+We used Principal Components Analysis (PCA) fit with the 'rda' function in the *vegan* package for \texttt{R} [@oksanen2017].
 We performed post-hoc group (location) and gradient (fire weather) analysis with the vegan 'envfit' function, stratified by year. 
 
 **Regression analysis.---**We assessed weather and fuel effects on three fire behavior response variables: Maximum flame temperature ($^\circ$C) 15 cm above the soil surface (mean of three thermocouples), maximum soil surface temperature ($^\circ$C; single thermocouple), and rate of spread (m min$^{\text{-}1}$) through each 1 m trianglular microplot. 
-Because all three response variables were best modeled with a gamma distribution, we fit generalized linear mixed-effect regression models for each response with the 'glmer' function from the *lme4* package in R [@bates2015]. 
+Because all three response variables were best modeled with a gamma distribution, we fit generalized linear mixed-effect regression models for each response with the 'glmer' function from the *lme4* package in \texttt{R} [@bates2015]. 
 Fixed effects consisted of weather and fuel variables, as described above. 
 The random-effect term was constructed to account for random variance among locations, spatial non-independence within locations and nested variance within sample plots, and the effect of repeated measurements within each location. 
 Due to concerns about collinearity between relative humidity and vapor pressure deficit because they are derived from the same variables, vapor pressure deficit was excluded from regression analysis for all three response variables. 
