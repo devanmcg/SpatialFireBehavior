@@ -1,13 +1,12 @@
 ---
 output:
-  #html_document
-  word_document:
-    reference_docx: word_template.docx
+  pdf_document:
+     keep_tex: yes
 ---
 
 ```{r setup, echo=FALSE, warning=FALSE, message = FALSE, results='hide'}
 knitr::opts_chunk$set(message = FALSE, warning=FALSE, 
-                      echo=FALSE, eval=TRUE) 
+                      echo=FALSE, eval=TRUE, fig.path = './springer/', dev = c('png', 'pdf')) 
 
 # Packages 
 pacman::p_load(tidyverse, gridExtra, wesanderson, captioner)
@@ -27,26 +26,26 @@ load("C:/Users/devan.mcgranahan/GithubProjects/SpatialFireBehavior/r objects/pca
   source("https://raw.githubusercontent.com/devanmcg/IntroRangeR/master/11_IntroMultivariate/ordinationsGGplot.R")
 ```
 
-<!-- Table 1: Results of generalized linear mixed effect regression models testing three measure of fire behavior against four potential predictor variables. Statistics reflect pooled results of 50 imputed datasets using the *mice* package in R; see Methods. Vapor pressure deficit included for Rate of spread only due to statistically-significant difference between GLMM regression results that included VPD compared to RH alone (Wald = 5.32, P = 0.02), while temperature models had no such difference. -->
+Table 1: Results of generalized linear mixed effect regression models testing three measure of fire behavior against four potential predictor variables. Statistics reflect pooled results of 50 imputed datasets using the *mice* package in R; see Methods. Vapor pressure deficit included for Rate of spread only due to statistically-significant difference between GLMM regression results that included VPD compared to RH alone (Wald = 5.32, P = 0.02), while temperature models had no such difference.
 
-<!-- |Response           |Model term             |       t df  |      P| -->
-<!-- |:------------------|:----------------------|------------:|------:| -->
-<!-- |Rate of spread     |                       |             |       | -->
-<!-- |                   |Wind speed             |  2.92 108.0 | < 0.01| -->
-<!-- |                   |Vapor pressure deficit | -2.31 108.1 |   0.02| -->
-<!-- |                   |Relative humidity      | -1.66 80.8  |   0.10| -->
-<!-- |                   |Fuel load              |  1.16 49.9  |   0.25| -->
-<!-- |                   |Fuel moisture          | -0.68 62.9  |   0.50| -->
-<!-- |Canopy temperature |                       |             |       | -->
-<!-- |                   |Fuel load              |  2.82 54.2  |   0.01| -->
-<!-- |                   |Fuel moisture          | -2.16 40.9  |   0.04| -->
-<!-- |                   |Relative humidity      | -1.19 120.4 |   0.24| -->
-<!-- |                   |Wind speed             |  0.02 132.4 |   0.99| -->
-<!-- |Surface temperature|                       |             |       | -->
-<!-- |                   |Relative humidity      | -1.19 74.8  |   0.24| -->
-<!-- |                   |Fuel load              | -0.48 20.1  |   0.64| -->
-<!-- |                   |Fuel moisture          | -0.47 40.1  |   0.64| -->
-<!-- |                   |Wind speed             |  0.06 49.5  |   0.95| -->
+|Response           |Model term             |       t df  |      P|
+|:------------------|:----------------------|------------:|------:|
+|Rate of spread     |                       |             |       |
+|                   |Wind speed             |  2.92 108.0 | < 0.01|
+|                   |Vapor pressure deficit | -2.31 108.1 |   0.02|
+|                   |Relative humidity      | -1.66 80.8  |   0.10|
+|                   |Fuel load              |  1.16 49.9  |   0.25|
+|                   |Fuel moisture          | -0.68 62.9  |   0.50|
+|Canopy temperature |                       |             |       |
+|                   |Fuel load              |  2.82 54.2  |   0.01|
+|                   |Fuel moisture          | -2.16 40.9  |   0.04|
+|                   |Relative humidity      | -1.19 120.4 |   0.24|
+|                   |Wind speed             |  0.02 132.4 |   0.99|
+|Surface temperature|                       |             |       |
+|                   |Relative humidity      | -1.19 74.8  |   0.24|
+|                   |Fuel load              | -0.48 20.1  |   0.64|
+|                   |Fuel moisture          | -0.47 40.1  |   0.64|
+|                   |Wind speed             |  0.06 49.5  |   0.95|
 
 
 ```{r }
@@ -75,15 +74,15 @@ LongData <-
                                'FuelMoisture') ~ 'Fuel', 
                     TRUE ~ 'Weather' ), 
            var = recode(var, 
-                        AirTemp = 'Air~temperature~(degree*C)', 
-                        RH = 'Relative~humidity~(\'%\')', 
-                        dpC = 'Dew~point~(degree*C)', 
-                        FuelMoisture = 'Total~fuel~moisture~(\'%\')', 
-                        tHa = 'Fuel~load~(kg~m^-2)',
-                        MaxC = 'Flame~temp~(degree*C)', 
-                        WindSpeed = 'Wind~speed~(m~s^-1)', 
-                        ros = 'Spread~rate~(m~min^-1)', 
-                        SoilMaxC = 'Soil~surface~temp~(degree*C)'), 
+                        AirTemp = 'Air temperature (°C)', 
+                        RH = 'Relative humidity (%)', 
+                        dpC = 'Dew point (°C)', 
+                        FuelMoisture = 'Total fuel moisture (%)', 
+                        tHa = 'Fuel load (kg/sq m)',
+                        MaxC = 'Flame temp (°C)', 
+                        WindSpeed = 'Wind speed (m/s)', 
+                        ros = 'Spread rate (m/min)', 
+                        SoilMaxC = 'Soil surface temp (°C)'), 
            location = recode(location, 
                              H = "Hettinger", 
                              CG = "Central Grasslands"))
@@ -112,7 +111,7 @@ LongData %>%
              stroke = 1.1) + 
   labs(y = NULL, x = NULL, 
        title = "Weather") + 
-  facet_wrap( ~ var, scales = 'free', labeller=label_parsed) +
+  facet_wrap( ~ var, scales = 'free') +
   scale_fill_manual(name = "Location", 
                     values = wes_cb1) + 
   theme(axis.text.x = element_blank(), 
@@ -137,7 +136,7 @@ LongData %>%
              stroke = 1.1) + 
   labs(y = NULL, x = NULL, 
        title = "Fuel") + 
-  facet_wrap( ~ var, scales = 'free', labeller=label_parsed) +
+  facet_wrap( ~ var, scales = 'free') +
   scale_fill_manual(name = "Location", 
                     values = wes_cb1) + 
   theme(axis.text.x = element_blank(), 
@@ -163,7 +162,7 @@ fb_d <-
              stroke = 1.1) + 
     labs(y = NULL, x = NULL, 
          title = "Fire behavior") + 
-    facet_wrap( ~ var, scales = 'free', labeller=label_parsed) +
+    facet_wrap( ~ var, scales = 'free') +
     scale_fill_manual(name = "Location", 
                       values = wes_cb1) + 
     theme(axis.text.x = element_blank(), 

@@ -1,7 +1,14 @@
 ---
-title: "Weather and fuel as modulators of grassland fire behavior in the northern Great Plains"
-author: 'Devan Allen McGranahan^A,C^, Megan E. Zopfi^B^, Kathryn A. Yurkonis^B^ ^A^ USDA Agricultural Research Service, Livestock and Range Research Laboratory, Miles City, Montana, USA ^B^ Department of Biology, University of North Dakota, Grand Forks, North Dakota, USA ^C^ Corresponding author. Email: Devan.McGranahan@usda.gov' 
+title: Weather and fuel as modulators of grassland fire behavior in the northern Great
+  Plains
+author: 'Devan Allen McGranahan^A,C^, Megan E. Zopfi^B^, Kathryn A. Yurkonis^B^ ^A^
+  USDA Agricultural Research Service, Livestock and Range Research Laboratory, Miles
+  City, Montana, USA ^B^ Department of Biology, University of North Dakota, Grand
+  Forks, North Dakota, USA ^C^ Corresponding author. Email: Devan.McGranahan@usda.gov'
 output:
+  pdf_document: 
+     citation_package: natbib
+     keep_tex: yes
   word_document:
     reference_docx: word_template.docx
     keep_md: yes

@@ -11,6 +11,7 @@ header-includes:
 output:
   pdf_document:
     highlight: tango
+    keep_tex: yes
 ---
 
 ```{r setup, echo=FALSE, warning=FALSE, message = FALSE, results='hide'}

@@ -1146,4 +1146,12 @@
   address   = {Melbourne},
 }
 
+@Book{weir2022,
+  editor    = {Weir, John R and Scasta, J Derek},
+  publisher = {CSIRO Publishing},
+  title     = {Global Application of Prescribed Fire},
+  year      = {2022},
+  address   = {Melbourne},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

@@ -16,6 +16,24 @@ vignettes/*.pdf
 
 CGREC_2019_fuels.csv
 
+index.Rmd
+mdpi.bst
+mdpi.Rmd
+body.Rmd
+index.Rmd
+-bookdownplus.Rproj
+_bookdown.yml
+
+_book/
+images/
+style/
+tex/
+backup/
+bib/
+_bookdown_files/
+
+Definitions/
+MDPI/
 data management/
 mapping/
 Fire spread/
