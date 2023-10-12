@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: GrasslandFireBehaviorNGP_R2.aux
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+The style file: sn-basic.bst
+Reallocating 'name_of_file' (item size: 1) to 20 items.
+Database file #1: FireBehaviorBib.bib
+Reallocating 'wiz_functions' (item size: 4) to 6000 items.
+Warning--missing publisher in rct2020
+You've used 71 entries,
+            3546 wiz_defined-function locations,
+            1183 strings with 21667 characters,
+and the built_in function-call counts, 90240 in all, are:
+= -- 10823
+> -- 2505
+< -- 39
++ -- 1312
+- -- 747
+* -- 6073
+:= -- 10153
+add.period$ -- 106
+call.type$ -- 71
+change.case$ -- 629
+chr.to.int$ -- 71
+cite$ -- 72
+duplicate$ -- 8763
+empty$ -- 5713
+format.name$ -- 983
+if$ -- 18614
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 559
+newline$ -- 222
+num.names$ -- 292
+pop$ -- 2914
+preamble$ -- 1
+purify$ -- 554
+quote$ -- 0
+skip$ -- 4415
+stack$ -- 0
+substring$ -- 6803
+swap$ -- 5855
+text.length$ -- 8
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 627
+warning$ -- 1
+while$ -- 463
+width$ -- 0
+write$ -- 850
+(There was 1 warning)

@@ -1138,4 +1138,21 @@
   publisher = {CSIRO Publishing},
 }
 
+@Book{finney2021,
+  author    = {Finney, Mark A and McAllister, Sara S and Forthofer, Jason M and Grumstrup, Torben P},
+  publisher = {CSIRO Publishing},
+  title     = {Wildland Fire Behaviour: Dynamics, Principles and Processes},
+  year      = {2021},
+  address   = {Melbourne},
+}
+
+@Article{mcgranahan2022,
+  author  = {McGranahan, Devan Allen and Wonkka, Carissa L and Dangi, Sadikshya and Spiess, Jonathan W and Geaumont, Benjamin},
+  journal = {Geoderma},
+  title   = {Mineral nitrogen and microbial responses to soil heating in burned grassland},
+  year    = {2022},
+  pages   = {116023},
+  volume  = {424},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
